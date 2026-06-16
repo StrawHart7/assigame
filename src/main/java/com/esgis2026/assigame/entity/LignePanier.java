@@ -1,5 +1,7 @@
 package com.esgis2026.assigame.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,6 +24,7 @@ public class LignePanier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_lignepanier;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_panier", nullable = false)
     private Panier panier;
