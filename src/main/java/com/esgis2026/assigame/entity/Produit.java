@@ -48,18 +48,46 @@ public class Produit {
     private String statut;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idcategorie_produit")
+    @JoinColumn(name = "idcategorie_produit", nullable = false)
     private CategorieProduit categorieProduit;
-     
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_utilisateur", nullable = false)
+    private Utilisateur utilisateur;
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id_produit == null) ? 0 : id_produit.hashCode());
+        return result;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Produit other = (Produit) obj;
+        if (id_produit == null) {
+            if (other.id_produit != null)
+                return false;
+        } else if (!id_produit.equals(other.id_produit))
+            return false;
+        return true;
+    }
 
+    @Override
+    public String toString() {
+        return "Produit [id_produit=" + id_produit + ", nom_produit=" + nom_produit + ", description=" + description
+                + ", prix=" + prix + ", image=" + image + ", date_ajout=" + date_ajout + ", statut=" + statut
+                + ", categorieProduit=" + categorieProduit + ", utilisateur=" + utilisateur + "]";
+    }
     
     
-
-    
-
-
 
 
 }

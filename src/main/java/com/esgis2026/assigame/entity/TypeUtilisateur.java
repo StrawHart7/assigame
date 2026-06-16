@@ -19,11 +19,11 @@ public class TypeUtilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_typeutilisateur;
 
-    @Column(nullable = true, length = 100)
-    private String nom_utilisateur;
+    @Column(nullable = false, length = 100)
+    private String nom_typeutilisateur;
 
     @Column(nullable = true, length = 100)
-    private String description;
+    private String description_typeutilisateur;
 
     @Override
     public int hashCode() {
@@ -52,9 +52,11 @@ public class TypeUtilisateur {
 
     @Override
     public String toString() {
-        return "typeutilisateur [id_typeutilisateur=" + id_typeutilisateur + ", nom_utilisateur=" + nom_utilisateur
-                + ", description=" + description + "]";
+        return "TypeUtilisateur [id_typeutilisateur=" + id_typeutilisateur + ", nom_typeutilisateur="
+                + nom_typeutilisateur + ", description_typeutilisateur=" + description_typeutilisateur + "]";
     }
+
+    
     
 
 

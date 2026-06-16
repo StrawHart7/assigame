@@ -58,5 +58,7 @@ public class CategorieProduit {
                 + nom_categorieproduit + ", description=" + description + "]";
     } 
 
+    
+
 
 }

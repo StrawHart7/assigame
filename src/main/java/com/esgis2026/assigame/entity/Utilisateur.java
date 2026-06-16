@@ -1,6 +1,5 @@
 package com.esgis2026.assigame.entity;
 
-import java.time.LocalDateTime;
 
 
 
@@ -27,29 +26,69 @@ public class Utilisateur {
    private Long id_utilisateur;
 
    @Column(nullable = false, length = 50)
-   private String nom;
+   private String Nom;
 
    @Column(nullable = false, length = 50)
-   private String prenom;
+   private String Prenom;
 
    @Column(unique = true, nullable = false, length = 100)
-   private String email; 
+   private String Email; 
 
    @Column(nullable = false, length = 100)
-   private String motdepasse;
+   private String Motdepasse;
+
+   @Column(nullable = false,  unique = true, length = 10)
+   private String Login;
 
    @Column(nullable = true, length = 20)
    private String telephone;
 
-   @Column(nullable = false)
+   /*@Column(nullable = false)
    private LocalDateTime date_creation;
-
+*/
    @Column(nullable = false, length = 20)
    private String statut;
 
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "id_typeutilisateur")
    private TypeUtilisateur typeutilisateur;
+
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((id_utilisateur == null) ? 0 : id_utilisateur.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Utilisateur other = (Utilisateur) obj;
+      if (id_utilisateur == null) {
+         if (other.id_utilisateur != null)
+            return false;
+      } else if (!id_utilisateur.equals(other.id_utilisateur))
+         return false;
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return "Utilisateur [id_utilisateur=" + id_utilisateur + ", Nom=" + Nom + ", Prenom=" + Prenom + ", Email="
+            + Email + ", Motdepasse=" + Motdepasse + ", Login=" + Login + ", telephone=" + telephone + ", statut="
+            + statut + ", typeutilisateur=" + typeutilisateur + "]";
+   }
+
+   
+
+
+
    
 
 }
