@@ -7,11 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.esgis2026.assigame.entity.Utilisateur;
+import com.esgis2026.assigame.entity.Panier;
 
 @Repository
-public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
-
-    @Query("SELECT u FROM Utilisateur u WHERE u.Email = :email")
-    Optional<Utilisateur> findByEmail(@Param("email") String email);
+public interface PanierRepository extends JpaRepository<Panier, Long> {
+    @Query("SELECT p FROM Panier p WHERE p.utilisateur.id_utilisateur = :idUtilisateur")
+    Optional<Panier> findByUtilisateur(@Param("idUtilisateur") Long idUtilisateur);
 }

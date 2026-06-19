@@ -1,9 +1,8 @@
 package com.esgis2026.assigame.entity;
 
-
-
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,36 +12,35 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "produit")
-
 public class Produit {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_produit;
-    
+
     @Column(unique = false, nullable = false, length = 50)
     private String nom_produit;
-    
-    @Column(unique = false, nullable =true, length = 200 )
+
+    @Column(unique = false, nullable = true, length = 200)
     private String description;
-    
+
     @Column(unique = false, nullable = true)
-    private double prix; 
-    
+    private double prix;
+
     @Column()
     private String image;
-    
+
     @Column(unique = false, nullable = false)
-    private LocalDateTime date_ajout; 
-    
-    
+    private LocalDateTime date_ajout;
+
     @Column(unique = false, nullable = false)
     private String statut;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idcategorie_produit", nullable = false)
     private CategorieProduit categorieProduit;
-    
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur", nullable = false)
     private Utilisateur utilisateur;
@@ -57,29 +55,19 @@ public class Produit {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         Produit other = (Produit) obj;
         if (id_produit == null) {
-            if (other.id_produit != null)
-                return false;
-        } else if (!id_produit.equals(other.id_produit))
-            return false;
+            if (other.id_produit != null) return false;
+        } else if (!id_produit.equals(other.id_produit)) return false;
         return true;
     }
 
     @Override
     public String toString() {
         return "Produit [id_produit=" + id_produit + ", nom_produit=" + nom_produit + ", description=" + description
-                + ", prix=" + prix + ", image=" + image + ", date_ajout=" + date_ajout + ", statut=" + statut
-                + ", categorieProduit=" + categorieProduit + ", utilisateur=" + utilisateur + "]";
+                + ", prix=" + prix + ", image=" + image + ", date_ajout=" + date_ajout + ", statut=" + statut + "]";
     }
-    
-    
-
-
 }
