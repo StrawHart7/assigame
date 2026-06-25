@@ -2,7 +2,7 @@ package com.esgis2026.assigame.entity;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class Produit {
     @Column(unique = false, nullable = true)
     private double prix;
 
-    @Column()
+    @Column(columnDefinition = "TEXT")
     private String image;
 
     @Column(unique = false, nullable = false)
@@ -38,11 +38,12 @@ public class Produit {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idcategorie_produit", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CategorieProduit categorieProduit;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "password", "motdepasse"})
     private Utilisateur utilisateur;
 
     @Override

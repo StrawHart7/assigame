@@ -60,6 +60,7 @@ public class PanierService {
         ligne.setPanier(panier);
         ligne.setProduit(produit);
         ligne.setQuantite(quantite);
+        ligne.setPrix_unitaire(produit.getPrix());
         panier.getLignes().add(ligne);
 
         return panierRepository.save(panier);

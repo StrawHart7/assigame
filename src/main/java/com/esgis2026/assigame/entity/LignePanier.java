@@ -36,6 +36,8 @@ public class LignePanier {
     @Column(nullable = false)
     private int quantite;
 
+    private Double prix_unitaire;
+
     @Override
     public int hashCode() {
         final int prime = 31;
