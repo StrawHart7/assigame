@@ -24,6 +24,9 @@ public class UtilisateurService {
         if (utilisateur.getStatut() == null) {
             utilisateur.setStatut("actif");
         }
+        if (utilisateur.getRole() == null) {
+            utilisateur.setRole("USER");
+        }
         return utilisateurRepository.save(utilisateur);
     }
 

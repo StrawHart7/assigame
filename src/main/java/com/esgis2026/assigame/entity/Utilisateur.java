@@ -18,29 +18,33 @@ public class Utilisateur {
 
     @JsonProperty("Nom")
     @Column(nullable = false, length = 50)
-    private String nom;
+    private String Nom;
 
     @JsonProperty("Prenom")
     @Column(nullable = false, length = 50)
-    private String prenom;
+    private String Prenom;
 
     @JsonProperty("Email")
     @Column(unique = true, nullable = false, length = 100)
-    private String email;
+    private String Email;
 
     @JsonProperty("Motdepasse")
     @Column(nullable = false, length = 100)
-    private String motdepasse;
+    private String Motdepasse;
 
     @JsonProperty("Login")
     @Column(nullable = false, unique = true, length = 10)
-    private String login;
+    private String Login;
 
     @Column(nullable = true, length = 20)
     private String telephone;
 
     @Column(nullable = false, length = 20)
     private String statut;
+
+    // USER par défaut, ADMIN pour les administrateurs
+    @Column(nullable = true, length = 20)
+    private String role;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_typeutilisateur")
@@ -68,8 +72,8 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur [id_utilisateur=" + id_utilisateur + ", nom=" + nom + ", prenom=" + prenom
-                + ", email=" + email + ", motdepasse=" + motdepasse + ", login=" + login
-                + ", telephone=" + telephone + ", statut=" + statut + "]";
+        return "Utilisateur [id_utilisateur=" + id_utilisateur + ", Nom=" + Nom + ", Prenom=" + Prenom
+                + ", Email=" + Email + ", Login=" + Login
+                + ", telephone=" + telephone + ", statut=" + statut + ", role=" + role + "]";
     }
 }
