@@ -18,23 +18,23 @@ public class Utilisateur {
 
     @JsonProperty("Nom")
     @Column(nullable = false, length = 50)
-    private String Nom;
+    private String nom;
 
     @JsonProperty("Prenom")
     @Column(nullable = false, length = 50)
-    private String Prenom;
+    private String prenom;
 
     @JsonProperty("Email")
     @Column(unique = true, nullable = false, length = 100)
-    private String Email;
+    private String email;
 
     @JsonProperty("Motdepasse")
     @Column(nullable = false, length = 100)
-    private String Motdepasse;
+    private String motdepasse;
 
     @JsonProperty("Login")
     @Column(nullable = false, unique = true, length = 10)
-    private String Login;
+    private String login;
 
     @Column(nullable = true, length = 20)
     private String telephone;
@@ -68,8 +68,8 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur [id_utilisateur=" + id_utilisateur + ", Nom=" + Nom + ", Prenom=" + Prenom
-                + ", Email=" + Email + ", Motdepasse=" + Motdepasse + ", Login=" + Login
+        return "Utilisateur [id_utilisateur=" + id_utilisateur + ", nom=" + nom + ", prenom=" + prenom
+                + ", email=" + email + ", motdepasse=" + motdepasse + ", login=" + login
                 + ", telephone=" + telephone + ", statut=" + statut + "]";
     }
 }

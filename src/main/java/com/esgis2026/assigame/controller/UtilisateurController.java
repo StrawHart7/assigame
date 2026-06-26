@@ -1,6 +1,7 @@
 package com.esgis2026.assigame.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,18 @@ public class UtilisateurController {
         return ResponseEntity.noContent().build();
     }
 
-    
-    
+    // ── POST /api/utilisateur/login ──────────────────────────────────────────
+    // Body : { "identifiant": "koffi", "motdepasse": "1234" }
+    // Retourne l'objet Utilisateur complet si succès, 401 sinon
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
+        try {
+            String identifiant = body.get("identifiant");
+            String motdepasse  = body.get("motdepasse");
+            Utilisateur utilisateur = utilisateurService.login(identifiant, motdepasse);
+            return ResponseEntity.ok(utilisateur);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(401).body(Map.of("erreur", e.getMessage()));
+        }
+    }
 }

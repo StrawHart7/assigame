@@ -21,6 +21,9 @@ public class UtilisateurService {
     }
 
     public Utilisateur createUtilisateur(Utilisateur utilisateur) {
+        if (utilisateur.getStatut() == null) {
+            utilisateur.setStatut("actif");
+        }
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -29,21 +32,30 @@ public class UtilisateurService {
     }
 
     public Utilisateur updateUtilisateur(Long idUtilisateur, Utilisateur details) {
-
         Utilisateur utilisateur = utilisateurRepository.findById(idUtilisateur)
                 .orElseThrow(() ->
-                        new RuntimeException("Utilisateur not found with id "+ idUtilisateur));
+                        new RuntimeException("Utilisateur not found with id " + idUtilisateur));
+        utilisateur.setNom(details.getNom());
+        utilisateur.setPrenom(details.getPrenom());
+        utilisateur.setEmail(details.getEmail());
+        utilisateur.setMotdepasse(details.getMotdepasse());
+        return utilisateurRepository.save(utilisateur);
+    }
 
-     utilisateur.setNom(details.getNom());
-     utilisateur.setPrenom(details.getPrenom());
-     utilisateur.setEmail(details.getEmail());
-     utilisateur.setMotdepasse(details.getMotdepasse());
-      
-     return utilisateurRepository.save(utilisateur);
-    }                 
+    // Login par Login OU Email
+    public Utilisateur login(String identifiant, String motdepasse) {
+        Utilisateur utilisateur = utilisateurRepository
+                .findByLoginOrEmail(identifiant)
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable."));
 
-       
+        if (!utilisateur.getMotdepasse().equals(motdepasse)) {
+            throw new RuntimeException("Mot de passe incorrect.");
+        }
 
+        if ("inactif".equalsIgnoreCase(utilisateur.getStatut())) {
+            throw new RuntimeException("Ce compte est désactivé.");
+        }
 
-       
+        return utilisateur;
+    }
 }
